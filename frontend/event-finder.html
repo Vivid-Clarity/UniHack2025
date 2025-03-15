@@ -7,21 +7,8 @@
   <link rel="stylesheet" href="static\styles.css">
 </head>
 <body>
-  <header>
-    <div class="logo-container">
-      <img src="docs\InCapsule Logo.png" alt="Job Capsules Logo">
-      <h1>Job Capsules</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="job-tracker.html">Job Tracker</a></li>
-        <li><a href="event-finder.html" class="active">Event Finder</a></li>
-        <li><a href="career-recommender.html">AI Career Recommender</a></li>
-        <li><a href="resume-builder.html">AI Resume Builder</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Placeholder for the navbar -->
+  <div id="navbar"></div>
 
   <main>
     <!-- Search Bar -->
@@ -53,5 +40,21 @@
     <p>Contact: info@careerhub.com | Phone: +1 234 567 890</p>
     <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
   </footer>
+  
+  <script>
+    // Fetch and inject the navbar
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar').innerHTML = data;
+
+        // Highlight the active link
+        const currentPage = window.location.pathname.split('/').pop();
+        const activeLink = document.getElementById(`nav-${currentPage.replace('.html', '')}`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+      });
+  </script>
 </body>
 </html>
