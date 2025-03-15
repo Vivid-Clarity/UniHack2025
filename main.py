@@ -1,7 +1,11 @@
 from flask import Flask, render_template, jsonify, request
 import api_theMuse
+from events_api import events_api_bp # Import Blueprint
 
 app = Flask(__name__)
+
+#Register the Blueprint
+app.register_blueprint(events_api_bp)
 
 @app.route("/")
 def home():

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 
 # Create a Blueprint for the fake API
-fake_api_bp = Blueprint('fake_api', __name__)
+events_api_bp = Blueprint('events_api', __name__)  # Fixed variable name
 
 # Fake event data
 events = [
@@ -35,12 +35,12 @@ events = [
 ]
 
 # Route to get all events
-@fake_api_bp.route('/api/events', methods=['GET'])
+@events_api_bp.route('/api/events', methods=['GET'])
 def get_events():
     return jsonify(events)
 
 # Route to get a specific event by ID
-@fake_api_bp.route('/api/events/<int:event_id>', methods=['GET'])
+@events_api_bp.route('/api/events/<int:event_id>', methods=['GET'])
 def get_event(event_id):
     event = next((event for event in events if event['id'] == event_id), None)
     if event:
