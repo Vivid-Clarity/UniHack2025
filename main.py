@@ -27,6 +27,7 @@ def resumeBuilder():
 #------------------------------------------------------
 #API shii
 
+# the muse api
 @app.route("/api/searchJobs")
 def search_jobs():
     #getting search and location form the request
@@ -38,7 +39,17 @@ def search_jobs():
     print(jobs)
     return jsonify(jobs)
 
+# adsuna api
+@app.route("/api/searchJobs")
+def search_jobs_route():
+    # Get search query and location from the request
+    search_query = request.args.get("query", "")
+    location = request.args.get("location", "")
 
+    # Fetch jobs from the Adzuna API
+    jobs = search_jobs(search_query, location)
+    print(jobs)  # Log the jobs fetched from the API
+    return jsonify(jobs)
 
 if __name__ == "__main__":
     app.run(debug=True)
