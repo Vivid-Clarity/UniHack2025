@@ -2,16 +2,28 @@ import requests
 
 API_KEY = "f7f914b9b885356c28807ced4a220e3af192f3b5470fe9ba608e352ba970ce7d"
 
-url = "https://www.themuse.com/api/public/jobs"
 
 def headers():
-    headers = {
+    return {
         "Accept": "application/json",
         "Authorization": f"Bearer {API_KEY}"
     }
-    return headers
 
-def getJobs(job_id):
-    url = f"https://www.themuse.com/api/public/jobs/{job_id}"
+def get_jobs(search_query="", location="", page=1):
+    url = "https://www.themuse.com/api/public/jobs"
+    params = {
+        "page": page,
+        "descending": "true"  # Sort by newest jobs first
+    }
+
+    # Add search query and location if provided
+    if search_query:
+        params["category"] = search_query
+    if location:
+        params["location"] = location
+
     res = requests.get(url, headers=headers())
-    return res
+    if res.status_code == 200:
+        return res.json().get("results", [])
+    else:
+        return []

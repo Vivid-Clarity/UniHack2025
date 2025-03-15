@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, request
+import api_theMuse
 
 app = Flask(__name__)
 
@@ -21,6 +22,22 @@ def careerRecommender():
 @app.route("/resumeBuilder")
 def resumeBuilder():
     return render_template("resume-builder.html")
+
+
+#------------------------------------------------------
+#API shii
+
+@app.route("/api/searchJobs")
+def search_jobs():
+    #getting search and location form the request
+    search_query = request.args.get("query", "")
+    location = request.args.get("location", "")
+
+    #getting the jobs from Muse API
+    jobs = api_theMuse.get_jobs(search_query,location)
+    return jsonify(jobs)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
