@@ -59,12 +59,24 @@
         document.getElementById('navbar').innerHTML = data;
 
         // Highlight the active link
-        const currentPage = window.location.pathname.split('/').pop();
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         const activeLink = document.getElementById(`nav-${currentPage.replace('.html', '')}`);
         if (activeLink) {
           activeLink.classList.add('active');
         }
       });
+
+      // Function to handle job search on the homepage
+      function searchJobs() {
+        const jobSearch = document.getElementById('jobSearch').value.trim();
+        if (jobSearch) {
+          // Redirect to job-tracker.html with the search query
+          window.location.href = `job-tracker.html?search=${encodeURIComponent(jobSearch)}`;
+        } else {
+          // Redirect to job-tracker.html without a search query
+          window.location.href = 'job-tracker.html';
+        }
+      }
   </script>
 </body>
 </html>

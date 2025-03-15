@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume Builder - Job Capsule</title>
-  <link rel="stylesheet" href="static\styles.css">
+  <link rel="stylesheet" href="static/styles.css">
+  <!-- Include jsPDF library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Include html2pdf.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
   <!-- Placeholder for the navbar -->
@@ -13,24 +17,45 @@
   <main>
     <!-- Resume Builder Form -->
     <div class="form-container">
-      <h2>AI Resume Builder</h2>
+      <h2>Resume Builder</h2>
       <form id="resumeForm">
+        <!-- Full Name -->
         <div class="form-group">
           <label for="fullName">Full Name</label>
           <input type="text" id="fullName" placeholder="Enter your full name" required>
         </div>
+    
+        <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" placeholder="Enter your email" required>
         </div>
+    
+        <!-- Phone Number -->
         <div class="form-group">
-          <label for="experience">Work Experience</label>
-          <textarea id="experience" placeholder="Describe your work experience" required></textarea>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter your phone number" required>
         </div>
+    
+        <!-- LinkedIn Profile -->
         <div class="form-group">
-          <label for="skills">Skills</label>
-          <textarea id="skills" placeholder="List your skills" required></textarea>
+          <label for="linkedin">LinkedIn Profile (optional)</label>
+          <input type="url" id="linkedin" placeholder="Enter your LinkedIn profile URL">
         </div>
+    
+        <!-- Portfolio/Website -->
+        <div class="form-group">
+          <label for="portfolio">Portfolio/Website (optional)</label>
+          <input type="url" id="portfolio" placeholder="Enter your portfolio/website URL">
+        </div>
+    
+        <!-- Professional Summary -->
+        <div class="form-group">
+          <label for="summary">Professional Summary</label>
+          <textarea id="summary" placeholder="Write a brief summary of your career goals and skills" required></textarea>
+        </div>
+    
+        <!-- Submit Button -->
         <div class="form-group">
           <button type="submit">Generate Resume</button>
         </div>
@@ -39,7 +64,21 @@
 
     <!-- Resume Preview -->
     <div class="resume-preview" id="resumePreview">
-      <!-- Resume will be dynamically added here -->
+      <h2>Resume Preview</h2>
+      <p><strong>Name:</strong> <span id="previewName"></span></p>
+      <p><strong>Email:</strong> <span id="previewEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="previewPhone"></span></p>
+      <p><strong>LinkedIn:</strong> <span id="previewLinkedin"></span></p>
+      <p><strong>Portfolio:</strong> <span id="previewPortfolio"></span></p>
+      <p><strong>Professional Summary:</strong> <span id="previewSummary"></span></p>
+      <p><strong>Work Experience:</strong> <span id="previewExperience"></span></p>
+      <p><strong>Education:</strong> <span id="previewEducation"></span></p>
+      <p><strong>Skills:</strong> <span id="previewSkills"></span></p>
+      <p><strong>Certifications:</strong> <span id="previewCertifications"></span></p>
+      <p><strong>Projects:</strong> <span id="previewProjects"></span></p>
+      <p><strong>Languages:</strong> <span id="previewLanguages"></span></p>
+      <p><strong>Hobbies/Interests:</strong> <span id="previewHobbies"></span></p>
+      <button id="downloadPdf">Download as PDF</button>
     </div>
   </main>
 
@@ -63,17 +102,35 @@
         }
       });
 
-    // Placeholder for AI Resume Builder functionality
+    // Handle form submission
     document.getElementById('resumeForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const resumePreview = document.getElementById('resumePreview');
-      resumePreview.innerHTML = `
-        <h2>Resume Preview</h2>
-        <p><strong>Name:</strong> ${document.getElementById('fullName').value}</p>
-        <p><strong>Email:</strong> ${document.getElementById('email').value}</p>
-        <p><strong>Work Experience:</strong> ${document.getElementById('experience').value}</p>
-        <p><strong>Skills:</strong> ${document.getElementById('skills').value}</p>
-      `;
+
+      // Update resume preview
+      document.getElementById('previewName').textContent = document.getElementById('fullName').value;
+      document.getElementById('previewEmail').textContent = document.getElementById('email').value;
+      document.getElementById('previewPhone').textContent = document.getElementById('phone').value;
+      document.getElementById('previewLinkedin').textContent = document.getElementById('linkedin').value;
+      document.getElementById('previewPortfolio').textContent = document.getElementById('portfolio').value;
+      document.getElementById('previewSummary').textContent = document.getElementById('summary').value;
+      document.getElementById('previewExperience').textContent = document.getElementById('experience').value;
+      document.getElementById('previewEducation').textContent = document.getElementById('education').value;
+      document.getElementById('previewSkills').textContent = document.getElementById('skills').value;
+      document.getElementById('previewCertifications').textContent = document.getElementById('certifications').value;
+      document.getElementById('previewProjects').textContent = document.getElementById('projects').value;
+      document.getElementById('previewLanguages').textContent = document.getElementById('languages').value;
+      document.getElementById('previewHobbies').textContent = document.getElementById('hobbies').value;
+
+      // Show resume preview section
+      document.getElementById('resumePreview').style.display = 'block';
+    });
+
+    // Download as PDF
+    document.getElementById('downloadPdf').addEventListener('click', function () {
+      const element = document.getElementById('resumePreview');
+      html2pdf()
+        .from(element)
+        .save('resume.pdf');
     });
   </script>
 </body>

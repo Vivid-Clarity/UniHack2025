@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Event Finder - Job Capsule</title>
-  <link rel="stylesheet" href="static\styles.css">
+  <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
   <!-- Placeholder for the navbar -->
@@ -13,26 +13,14 @@
   <main>
     <!-- Search Bar -->
     <div class="search-bar">
-      <input type="text" placeholder="Event Name">
-      <input type="text" placeholder="Location">
-      <button>Find Event</button>
+      <input type="text" id="searchTitle" placeholder="Search by title...">
+      <input type="text" id="searchLocation" placeholder="Search by location...">
+      <button onclick="filterEvents()">Search</button>
     </div>
 
     <!-- Event Listings -->
-    <div class="event-listings">
-      <div class="event-card">
-        <h3>Tech Networking Night</h3>
-        <p>Date: October 25, 2023</p>
-        <p>Location: San Francisco, CA</p>
-        <button>RSVP</button>
-      </div>
-      <div class="event-card">
-        <h3>Startup Pitch Event</h3>
-        <p>Date: November 10, 2023</p>
-        <p>Location: Austin, TX</p>
-        <button>RSVP</button>
-      </div>
-      <!-- Add more event cards here -->
+    <div class="event-listings" id="eventList">
+      <!-- Event cards will be dynamically added here -->
     </div>
   </main>
 
@@ -40,7 +28,7 @@
     <p>Contact: info@careerhub.com | Phone: +1 234 567 890</p>
     <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
   </footer>
-  
+
   <script>
     // Fetch and inject the navbar
     fetch('navbar.html')
@@ -55,6 +43,167 @@
           activeLink.classList.add('active');
         }
       });
+
+    // Sample Data (Replace this with data from your backend API)
+    const events = [
+      {
+        id: 1,
+        badge: "Fully booked",
+        type: "Networking",
+        title: "Tech Networking Night",
+        date: "March 25, 2025 | 6:00 PM",
+        location: "San Francisco, CA",
+        organizer: "Tech Corp",
+        description: "Join us for an evening of networking with top tech professionals. Learn about the latest trends and opportunities in the industry.",
+        tags: ["Tech", "Networking", "Career Growth"],
+        posted: "Posted 3 days ago",
+      },
+      {
+        id: 2,
+        badge: "Upcoming",
+        type: "Workshop",
+        title: "AI Career Workshop",
+        date: "May 10, 2025 | 10:00 AM",
+        location: "Online",
+        organizer: "AI Academy",
+        description: "Learn how to kickstart your career in AI with hands-on workshops and expert guidance.",
+        tags: ["AI", "Workshop", "Career Growth"],
+        posted: "Posted 5 days ago",
+      },
+      {
+        id: 3,
+        badge: "Upcoming",
+        type: "Conference",
+        title: "Future of Web Development",
+        date: "April 15, 2025 | 9:00 AM",
+        location: "New York, NY",
+        organizer: "Web Dev Summit",
+        description: "Explore the future of web development with industry leaders, discussing trends, frameworks, and best practices.",
+        tags: ["Web Development", "Conference", "Technology"],
+        posted: "Posted 2 days ago"
+      },
+      {
+        id: 4,
+        badge: "Upcoming",
+        type: "Hackathon",
+        title: "Global AI Hackathon",
+        date: "April 2, 2025 | 8:00 AM",
+        location: "Remote",
+        organizer: "AI Hackers United",
+        description: "Compete in a global AI hackathon, solve real-world problems, and win exciting prizes!",
+        tags: ["AI", "Hackathon", "Coding"],
+        posted: "Posted 7 days ago"
+      },
+      {
+        id: 5,
+        badge: "Upcoming",
+        type: "Meetup",
+        title: "Startup Founders Meetup",
+        date: "May 8, 2025 | 5:30 PM",
+        location: "Los Angeles, CA",
+        organizer: "Startup Hub",
+        description: "Connect with fellow startup founders, exchange ideas, and network with investors.",
+        tags: ["Startups", "Networking", "Entrepreneurship"],
+        posted: "Posted 1 day ago"
+      },
+      {
+        id: 6,
+        badge: "Past",
+        type: "Workshop",
+        title: "Machine Learning Bootcamp",
+        date: "March 15, 2025 | 11:00 AM",
+        location: "Online",
+        organizer: "ML Experts",
+        description: "A hands-on machine learning bootcamp covering data science, model training, and real-world applications.",
+        tags: ["Machine Learning", "Workshop", "Data Science"],
+        posted: "Posted 4 days ago"
+      },
+      {
+        id: 7,
+        badge: "Past",
+        type: "Conference",
+        title: "Cloud Computing Summit",
+        date: "February 20, 2025 | 10:00 AM",
+        location: "Seattle, WA",
+        organizer: "Cloud Tech",
+        description: "An in-depth look at cloud computing advancements and strategies from leading companies.",
+        tags: ["Cloud Computing", "Technology", "Conference"],
+        posted: "Posted 30 days ago"
+      },
+      {
+        id: 8,
+        badge: "Upcoming",
+        type: "Webinar",
+        title: "Cybersecurity in 2024",
+        date: "June 5, 2024 | 2:00 PM",
+        location: "Online",
+        organizer: "Cyber Experts",
+        description: "A detailed discussion on upcoming cybersecurity threats and how to protect your business.",
+        tags: ["Cybersecurity", "Webinar", "Tech"],
+        posted: "Posted 6 days ago"
+      }
+    ];
+
+    // Render Events
+    function renderEvents(filteredEvents = events) {
+      const eventList = document.getElementById('eventList');
+      eventList.innerHTML = '';
+
+      filteredEvents.forEach(event => {
+        const eventCard = document.createElement('div');
+        eventCard.classList.add('event-card');
+        eventCard.innerHTML = `
+          <div class="event-header">
+            <span class="event-badge ${event.badge.toLowerCase().replace(' ', '-')}">${event.badge}</span>
+            <span class="event-type">${event.type}</span>
+          </div>
+          <h3 class="event-title">${event.title}</h3>
+          <div class="event-details">
+            <div class="event-date">
+              <span class="icon">📅</span>
+              <span>${event.date}</span>
+            </div>
+            <div class="event-location">
+              <span class="icon">📍</span>
+              <span>${event.location}</span>
+            </div>
+          </div>
+          <div class="event-organizer">
+            <span class="icon">👤</span>
+            <span>Hosted by ${event.organizer}</span>
+          </div>
+          <p class="event-description">${event.description}</p>
+          <div class="event-tags">
+            ${event.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+          <div class="event-actions">
+            <button class="register-button" ${event.badge === 'Past' ? 'disabled' : ''}>Register Now</button>
+            <span class="event-posted">${event.posted}</span>
+          </div>
+        `;
+        eventList.appendChild(eventCard);
+      });
+    }
+
+    // Filter Events
+    function filterEvents() {
+      const searchTitle = document.getElementById('searchTitle').value.toLowerCase();
+      const searchLocation = document.getElementById('searchLocation').value.toLowerCase();
+
+      const filteredEvents = events.filter(event => {
+        const matchesTitle = event.title.toLowerCase().includes(searchTitle);
+        const matchesLocation = event.location.toLowerCase().includes(searchLocation);
+        const matchesOrganizer = event.organizer.toLowerCase().includes(searchTitle);
+        const matchesTags = event.tags.some(tag => tag.toLowerCase().includes(searchTitle));
+
+        return (matchesTitle || matchesOrganizer || matchesTags) && matchesLocation;
+      });
+
+      renderEvents(filteredEvents);
+    }
+
+    // Initial Render
+    renderEvents();
   </script>
 </body>
 </html>
