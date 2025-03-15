@@ -197,15 +197,60 @@
 
   <main>
     <!-- Search Bar -->
+    <script>
+      //fetchig jobs from backend
+      async function fetchJobs(searchQuery = "", location = "") {
+        const url = `/api/searchJobs?query=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(location)}`;
+        const response = await fetch(url);
+        const jobs = await response.json();
+        return jobs;      
+      }
+
+      //render the jobs in the frontend
+      function renderJobs(jobs){
+        const jobList = document.getElementById('jobList');
+        jobList.innerHTML = ``;
+
+        jobs.forEach(element => {
+          const jobCard = document.createElement('div');
+          jobCard.classList.add('job-card');
+          jobCard.innerHTML = `
+            <h3>${job.name}</h3>
+            <p>${job.company.name}</p>
+            <p>${job.locations[0].name}</p>
+            <p>${job.contents}</p>
+            <a href="${job.refs.landing_page}" target="_blank">Apply Now</a>
+          `;
+          jobList.appendChild(jobCard);
+        });
+      }
+
+      //handling the search bar
+      async function filterJobs() {
+        const searchQuery = document.getElementById('search').value;
+        const location = "";
+
+        //get the jobs form the backend
+        const jobs = await fetchJobs(searchQuery,location);
+        //then render them inthe frontend
+        renderJobs(jobs);
+      }
+
+      //
+      // window.
+
+    </script>
+
     <div class="search-bar">
       <input type="text" id="search" placeholder="Search jobs...">
-      <select id="filterStatus">
+      <input type="text" id="location" placeholder="Location..."> 
+      <!-- <select id="filterStatus">
         <option value="all">All</option>
         <option value="applied">Applied</option>
         <option value="interview">Interview</option>
         <option value="offer">Offer</option>
         <option value="rejected">Rejected</option>
-      </select>
+      </select> -->
       <button onclick="filterJobs()">Search</button>
     </div>
 
@@ -220,7 +265,7 @@
     <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
   </footer>
 
-  <script>
+  <!-- <script>
     // Sample Data
     let jobs = [
       { id: 1, title: "Software Engineer", company: "Tech Corp", status: "applied" },
@@ -261,6 +306,6 @@
 
     // Initial Render
     renderJobs();
-  </script>
+  </script> -->
 </body>
 </html>
