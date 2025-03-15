@@ -19,9 +19,9 @@ body {
 
 /* Header Styles */
 header {
-  background: #ffffff;
+  background: transparent;
   padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -80,12 +80,27 @@ header nav ul li a:hover {
   font-family: 'Space Grotesk', sans-serif;
   background: linear-gradient(150deg, #f86300, #6f04eb);
   color: #fff;
-  padding: 100px 20px;
+  padding: 0px 20px 100px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-top: 0;
+}
+
+.hero {
+  background:
+    radial-gradient(at 40% 20%, hsla(28,100%,74%,1) 0px, transparent 50%),
+    radial-gradient(at 86% 0%, hsla(285,95%,38%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0px, transparent 50%),
+    radial-gradient(at 75% 52%, hsla(32,75%,47%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(53,100%,70%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(283,100%,76%,1) 0px, transparent 50%),
+    linear-gradient(to top, rgba(255,255,255,0.8), rgba(255,255,255,1));
+  padding: 150px 20px 100px;
+  margin-top: -1px;
 }
 
 .hero img {
