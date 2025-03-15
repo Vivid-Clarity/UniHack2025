@@ -199,8 +199,10 @@
     <!-- Search Bar -->
     <script>
       //fetchig jobs from backend
-      async function fetchJobs(searchQuery = "", location = "") {
+      async function fetchJobs(searchQuery = "", location = "") {        
         const url = `/api/searchJobs?query=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(location)}`;
+        console.log(url);
+        
         const response = await fetch(url);
         const jobs = await response.json();
         return jobs;      

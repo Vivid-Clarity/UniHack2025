@@ -1,24 +1,35 @@
 import requests
 
-API_KEY = "NMQD62E6FYOPTRMD7ULR"
+# Replace with your API key
+API_KEY = "your_api_key_here"
 
-url = "https://www.eventbriteapi.com/v3/events/search/"
+# API endpoint for job search
+url = "https://www.themuse.com/api/public/jobs"
 
+# Parameters for the request (e.g., search for remote Python jobs)
 params = {
-    "q": "cyber security",  # Search query (e.g., "technology", "music", etc.)
-    "location.address": "Glen Waverley",  # Location (optional)
-    "sort_by": "date",  # Sort by date
-    "token": API_KEY  # Your API key
+    "category": "Software Engineering",  # Optional: Filter by category
+    "location": "Melbourne, Australia",                # Optional: Filter by location
+    "page": 1                            # Optional: Pagination
 }
 
-response = requests.get(url, params=params)
+# Headers with API key
+headers = {
+    "Accept": "application/json",
+    "Authorization": f"Bearer {API_KEY}"
+}
 
+# Make the request
+response = requests.get(url, headers=headers, params=params)
+
+# Check if the request was successful
 if response.status_code == 200:
-    events = response.json().get("events", [])
-    for event in events:
-        print(f"Event: {event['name']['text']}")
-        print(f"Date: {event['start']['local']}")
-        print(f"URL: {event['url']}")
+    jobs = response.json()
+    for job in jobs["results"]:
+        print(f"Job Title: {job['name']}")
+        print(f"Company: {job['company']['name']}")
+        print(f"Location: {job['locations'][0]['name']}")
+        print(f"Link: {job['refs']['landing_page']}")
         print("-" * 40)
 else:
     print(f"Error: {response.status_code} - {response.text}")
