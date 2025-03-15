@@ -10,6 +10,7 @@ def headers():
     }
 
 def get_jobs(search_query="", location="", page=1):
+    print("query = " + search_query)
     url = "https://www.themuse.com/api/public/jobs"
     params = {
         "page": page,

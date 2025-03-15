@@ -39,6 +39,7 @@ def search_jobs():
 
     #getting the jobs from Muse API
     jobs = api_theMuse.get_jobs(search_query,location)
+    print(jobs)
     return jsonify(jobs)
 
 
