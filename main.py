@@ -11,8 +11,6 @@ app.register_blueprint(events_api_bp)
 def home():
     return render_template("index.html")
 
-
-
 @app.route("/jobTracker")
 def jobTracker():
     return render_template("job-tracker.html")
@@ -32,18 +30,6 @@ def resumeBuilder():
 
 #------------------------------------------------------
 #API shii
-
-# the muse api
-# @app.route("/api/searchJobs")
-# def search_jobs():
-#     #getting search and location form the request
-#     search_query = request.args.get("query", "")
-#     location = request.args.get("location", "")
-
-#     #getting the jobs from Muse API
-#     jobs = api_theMuse.get_jobs(search_query,location)
-#     print(jobs)
-#     return jsonify(jobs)
 
 # adsuna api
 @app.route("/api/searchJobs")
