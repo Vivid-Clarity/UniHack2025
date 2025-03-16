@@ -1,11 +1,18 @@
 from flask import Flask, render_template, jsonify, request
 import api_adsuna
 from events_api import events_api_bp # Import Blueprint
+from api_linkedin import linkedin_bp
+from api_deepseek import init_deepseek_api, recommender_careerpath  # Import DeepSeek API methods
 
 app = Flask(__name__)
+app.secret_key = 'some_random_secret_key'
+
+# Initialize DeepSeek API
+init_deepseek_api()
 
 #Register the Blueprint
 app.register_blueprint(events_api_bp)
+app.register_blueprint(linkedin_bp)
 
 @app.route("/")
 def home():
@@ -42,6 +49,24 @@ def search_jobs_route():
     jobs = api_adsuna.search_jobs(search_query, location)
     # print(jobs)  # Log the jobs fetched from the API
     return jsonify(jobs)
+
+
+# DeepSeek API route
+@app.route("/api/recommendCareer", methods=["POST"])
+def recommend_career():
+    # Get user data from the front end
+    user_data = request.json
+
+    # Validate user data
+    if not user_data:
+        return jsonify({"error": "No data provided"}), 400
+
+    # Call the DeepSeek API to get a career recommendation
+    recommendation = recommender_careerpath(user_data)
+
+    # Return the recommendation as JSON
+    return jsonify({"recommendation": recommendation})
+
 
 if __name__ == "__main__":
     app.run(debug=True)

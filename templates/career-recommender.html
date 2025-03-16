@@ -6,23 +6,37 @@
     <!-- Career Recommender Form -->
     <div class="form-container">
       <h2>AI Career Recommender</h2>
-      <form id="careerForm">
+      <form id="careerRecommenderForm">
+        <!-- Skills Input -->
         <div class="form-group">
           <label for="skills">Your Skills</label>
-          <input type="text" id="skills" placeholder="Enter your skills (e.g., programming, design)" required>
+          <textarea id="skills" placeholder="Enter your skills (e.g., programming, design)" required></textarea>
         </div>
+  
+        <!-- Interests Input -->
         <div class="form-group">
           <label for="interests">Your Interests</label>
-          <input type="text" id="interests" placeholder="Enter your interests (e.g., technology, healthcare)" required>
+          <textarea id="interests" placeholder="Enter your interests (e.g., technology, healthcare)" required></textarea>
         </div>
+  
+        <!-- Education Input -->
+        <div class="form-group">
+          <label for="education">Your Education</label>
+          <input type="text" id="education" placeholder="Enter your education (e.g., Bachelor's in Computer Science)" required>
+        </div>
+  
+        <!-- Years of Experience Dropdown -->
         <div class="form-group">
           <label for="experience">Years of Experience</label>
           <select id="experience" required>
             <option value="0-2">0-2 years</option>
-            <option value="3-5">3-5 years</option>
-            <option value="5+">5+ years</option>
+            <option value="2-5">2-5 years</option>
+            <option value="5-10">5-10 years</option>
+            <option value="10+">10+ years</option>
           </select>
         </div>
+  
+        <!-- Submit Button -->
         <div class="form-group">
           <button type="submit">Get Recommendations</button>
         </div>
@@ -51,18 +65,20 @@
       });
 
     // Placeholder for AI Career Recommender functionality
-    document.getElementById('careerForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
+    document.getElementById('careerRecommenderForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-      // Get form data
-      const skills = document.getElementById('skills').value;
+        // Get form data
+        const skills = document.getElementById('skills').value;
         const interests = document.getElementById('interests').value;
+        const education = document.getElementById('education').value;
         const experience = document.getElementById('experience').value;
 
         // Prepare the data to send to the backend
         const userData = {
           skills: skills,
           interests: interests,
+          education: education,
           experience: experience
         };
 
@@ -101,22 +117,57 @@
           console.error('Error:', error);
           document.getElementById('recommendations').innerHTML = `<p>Failed to fetch recommendations. Please try again later.</p>`;
         }
+        
+        // Fetch recommendations (placeholder logic)
+        fetch('/get-recommendations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ skills, interests, education, experience }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Recommendations:', data);
+            // Display recommendations on the page
+          })
+          .catch(error => {
+            console.error('Error fetching recommendations:', error);
+        });
+        
+      });
 
-      const recommendations = document.getElementById('recommendations');
-      recommendations.innerHTML = `
-        <div class="recommendation-card">
-          <h3>Software Engineer</h3>
-          <p>Recommended based on your skills in programming and interest in technology.</p>
-        </div>
-        <div class="recommendation-card">
-          <h3>Data Scientist</h3>
-          <p>Recommended based on your analytical skills and interest in data.</p>
-        </div>
-        <div class="recommendation-card">
-          <h3>UX Designer</h3>
-          <p>Recommended based on your design skills and interest in user experience.</p>
-        </div>
-      `;
-    });
+  //   document.getElementById('careerRecommenderForm').addEventListener('submit', function (e) {
+  //   e.preventDefault();
+
+  //   // Get form data
+  //   const skills = document.getElementById('skills').value;
+  //   const interests = document.getElementById('interests').value;
+  //   const education = document.getElementById('education').value;
+  //   const experience = document.getElementById('experience').value;
+
+  //   // Log the data (replace with API call to fetch recommendations)
+  //   console.log('Skills:', skills);
+  //   console.log('Interests:', interests);
+  //   console.log('Education:', education);
+  //   console.log('Experience:', experience);
+
+  //   // Fetch recommendations (placeholder logic)
+  //   fetch('/get-recommendations', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ skills, interests, education, experience }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log('Recommendations:', data);
+  //       // Display recommendations on the page
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching recommendations:', error);
+  //     });
+  // });
   </script>
 {% endblock %}

@@ -1,6 +1,6 @@
 import requests
 
-NEW_API_KEY ="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"
+NEW_API_KEY ="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"
 NEW_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 def init_deepseek_api():
@@ -20,10 +20,9 @@ def recommender_careerpath(user_data):
     # Construct the prompt for deepseek 
     prompt = f"""
         Based on the following user data, recommend a career pathway:
-        - Education: {user_data.get('education')}
         - Skills: {user_data.get('skills')}
         - Interests: {user_data.get('interests')}
-        - Experience: {user_data.get('years of experience')}
+        - Experience: {user_data.get('experience')}
     """
 
     # Prepare the request payload
