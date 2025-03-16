@@ -32,8 +32,9 @@
             <div class="job-location">${job.location.display_name}</div>
             <p class="job-description">${job.description}</p> <!-- Add job description -->
             <div class="job-actions">
-              <button class="apply-button"><a href="${job.redirect_url}" target="_blank">Apply Now</a></button>
-              
+              <button class="apply-button">
+                      <a href="${job.redirect_url}" target="_blank" style="color: white; text-decoration: none;">Apply Now</a>
+              </button>              
             </div>
           `;
           jobList.appendChild(jobCard);
