@@ -1,5 +1,5 @@
-from flask import Flask, render_template, jsonify, request, url_for, redirect, session
-import api_adsuna
+from flask import Flask, render_template, jsonify, request
+import api_theMuse
 from events_api import events_api_bp # Import Blueprint
 from api_linkedin import init_linkedin_oauth, get_linkedin_profile, get_linkedin_email  # Import LinkedIn API methods
 
@@ -36,14 +36,14 @@ def resumeBuilder():
 #API shii
 
 # the muse api
-@app.route("/api/searchJobs")
-def search_jobs():
-    #getting search and location form the request
-    search_query = request.args.get("query", "")
-    location = request.args.get("location", "")
+# @app.route("/api/searchJobs")
+# def search_jobs():
+#     #getting search and location form the request
+#     search_query = request.args.get("query", "")
+#     location = request.args.get("location", "")
 
     #getting the jobs from Muse API
-    jobs = api_adsuna.get_jobs(search_query,location)
+    jobs = api_theMuse.get_jobs(search_query,location)
     print(jobs)
     return jsonify(jobs)
 
@@ -55,7 +55,7 @@ def search_jobs_route():
     location = request.args.get("location", "")
 
     # Fetch jobs from the Adzuna API
-    jobs = api_adsuna.search_jobs(search_query, location)
+    jobs = search_jobs(search_query, location)
     print(jobs)  # Log the jobs fetched from the API
     return jsonify(jobs)
 
