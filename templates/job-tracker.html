@@ -4,15 +4,62 @@
 
 {% block content %}
     <!-- Search Bar -->
+    <script>
+      //ADSUNA API STUFF BELOW--------------------------------------------
+      function renderJobs(jobs) {
+        const jobList = document.getElementById('jobList');
+        if (!jobList) {
+          console.error("Job list element not found!");
+          return;
+        }
+        jobList.innerHTML = ''; // Clear the job list before rendering new jobs
+
+        // Check if jobs array is empty
+        if (jobs.length === 0) {
+          jobList.innerHTML = "<p>No jobs found.</p>";
+          return;
+        }
+
+        // Iterate over each job and create a job card
+        jobs.forEach(job => {
+          const jobCard = document.createElement('div');
+          jobCard.classList.add('job-card');
+          jobCard.innerHTML = `
+            <h3>${job.title}</h3>
+            <p>${job.company.display_name}</p>
+            <p>${job.location.display_name}</p>
+            <p>${job.description}</p>
+            <a href="${job.redirect_url}" target="_blank">Apply Now</a>
+          `;
+          jobList.appendChild(jobCard);
+        });
+    }
+
+    // Fetch jobs from the backend (Adzuna API)
+    async function fetchJobs(searchQuery = "", location = "") {
+      const url = `/api/searchJobs?query=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(location)}`;
+      const response = await fetch(url);
+      const jobs = await response.json();
+      return jobs;
+    }
+
+    // Handle the search bar
+    async function filterJobs() {
+      const searchQuery = document.getElementById('search').value;
+      const location = ""; // Add a location input field if needed
+
+      // Fetch jobs from the backend
+      const jobs = await fetchJobs(searchQuery, location);
+
+      // Render the jobs in the frontend
+      renderJobs(jobs);
+    }
+
+    </script>
+
+
     <div class="search-bar">
       <input type="text" id="search" placeholder="Search jobs...">
-      <select id="filterStatus">
-        <option value="all">All</option>
-        <option value="applied">Applied</option>
-        <option value="interview">Interview</option>
-        <option value="offer">Offer</option>
-        <option value="rejected">Rejected</option>
-      </select>
       <button onclick="filterJobs()">Search</button>
     </div>
 
@@ -27,108 +74,4 @@
     <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
   </footer>
 
-  <script>
-    // Fetch and inject the navbar
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar').innerHTML = data;
-
-        // Highlight the active link
-        const currentPage = window.location.pathname.split('/').pop();
-        const activeLink = document.getElementById(`nav-${currentPage.replace('.html', '')}`);
-        if (activeLink) {
-          activeLink.classList.add('active');
-        }
-      });
-
-    // Sample Data
-    const jobs = [
-      {
-        id: 1,
-        badge: "New",
-        hiring: "Hiring multiple candidates",
-        title: "Math Teacher",
-        company: "WuKong Education",
-        rating: "4.6 ★",
-        location: "Australia",
-        salary: "$45 - $50 an hour",
-        type: "Part-time 🟡",
-        schedule: "Monday to Friday +2",
-        posted: "Active 2 days ago",
-      },
-      {
-        id: 2,
-        badge: "New",
-        hiring: "Hiring multiple candidates",
-        title: "Software Engineer",
-        company: "Tech Corp",
-        rating: "4.8 ★",
-        location: "Remote",
-        salary: "$80 - $100 an hour",
-        type: "Full-time 🟢",
-        schedule: "Flexible",
-        posted: "Active 1 day ago",
-      },
-    ];
-
-    // Render Jobs
-    function renderJobs(filteredJobs = jobs) {
-      const jobList = document.getElementById('jobList');
-      jobList.innerHTML = '';
-
-      filteredJobs.forEach(job => {
-        const jobCard = document.createElement('div');
-        jobCard.classList.add('job-card');
-        jobCard.innerHTML = `
-          <div class="job-header">
-            <span class="job-badge">${job.badge}</span>
-            <span class="job-hiring">${job.hiring}</span>
-          </div>
-          <h3 class="job-title">${job.title}</h3>
-          <div class="job-company">
-            <span class="company-name">${job.company}</span>
-            <span class="company-rating">${job.rating}</span>
-          </div>
-          <div class="job-location">${job.location}</div>
-          <div class="job-salary">${job.salary}</div>
-          <div class="job-type">
-            <span class="job-type-badge">${job.type}</span>
-            <span class="job-schedule">${job.schedule}</span>
-          </div>
-          <div class="job-actions">
-            <button class="apply-button">► Apply Now</button>
-            <span class="job-posted">${job.posted}</span>
-          </div>
-        `;
-        jobList.appendChild(jobCard);
-      });
-    }
-
-    // Filter Jobs
-    function filterJobs() {
-      const searchTerm = document.getElementById('search').value.toLowerCase();
-      const statusFilter = document.getElementById('filterStatus').value;
-
-      const filteredJobs = jobs.filter(job => {
-        const matchesSearch = job.title.toLowerCase().includes(searchTerm) || job.company.toLowerCase().includes(searchTerm);
-        const matchesStatus = statusFilter === 'all' || job.type.toLowerCase().includes(statusFilter);
-        return matchesSearch && matchesStatus;
-      });
-
-      renderJobs(filteredJobs);
-    }
-
-    // Extract the search query from the URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchQuery = urlParams.get('search');
-
-    // Pre-fill the search bar with the query from the homepage
-    if (searchQuery) {
-      document.getElementById('search').value = searchQuery;
-    }
-
-    // Initial Render (filter jobs based on the search query)
-    filterJobs();
-  </script>
 {% endblock %}
