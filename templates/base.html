@@ -21,7 +21,37 @@
         <li><a href="/resumeBuilder" id="nav-resume-builder">Resume Builder</a></li>
       </ul>
     </nav>
+    <!-- Person Icon for Login -->
+    <div class="user-icon" id="userIcon">
+      <img src="{{ url_for('static', filename='docs/person icon.png') }}" alt="User Icon" width="24" height="24">
+    </div>
   </header>
+
+  <!-- Login Window -->
+  <div class="login-window" id="loginWindow">
+    <div class="login-content">
+      <h3>Login</h3>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+          <button type="submit">Login</button>
+        </div>
+        <div class="form-group">
+          <button type="button" onclick="window.location='{{ url_for('linkedin_bp.linkedin_auth') }}'">
+            Login with LinkedIn
+          </button>
+        </div>        
+      </form>
+      <p>Don't have an account? <a href="/register" id = nav-register>Register here</a></p>
+    </div>
+  </div>
 
   <main>
     {% block content %}{% endblock %}
@@ -31,5 +61,36 @@
     <p>Contact: info@jobcapsules.com | Phone: +1 234 567 890</p>
     <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
   </footer>
+
+  <!-- JavaScript for Login Window Toggle -->
+  <script>
+    // Toggle Login Window
+    document.getElementById('userIcon').addEventListener('click', function () {
+      const loginWindow = document.getElementById('loginWindow');
+      loginWindow.style.display = loginWindow.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Close Login Window when clicking outside
+    window.addEventListener('click', function (e) {
+      const loginWindow = document.getElementById('loginWindow');
+      const userIcon = document.getElementById('userIcon');
+      if (e.target !== userIcon && !userIcon.contains(e.target)) {
+        loginWindow.style.display = 'none';
+      }
+    });
+
+    // Handle Login Form Submission
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      // Add your login logic here (e.g., validate credentials, call an API, etc.)
+      console.log('Login attempted with:', email, password);
+
+      // Close the login window after submission
+      document.getElementById('loginWindow').style.display = 'none';
+    });
+  </script>
 </body>
 </html>

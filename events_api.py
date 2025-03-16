@@ -107,7 +107,7 @@ events = [
         "type": "Hackathon",
         "title": "Fintech Innovation Challenge",
         "date": "August 20, 2025 | 9:00 AM",
-        "location": "AU",
+        "location": "Brisbane, AU",
         "organizer": "Fintech Labs",
         "description": "Solve real-world financial problems in this fintech hackathon.",
         "tags": ["Fintech", "Hackathon", "Startups"],
