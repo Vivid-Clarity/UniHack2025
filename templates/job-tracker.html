@@ -42,10 +42,10 @@
             </div>
             <p class="job-description">${job.description}</p> <!-- Add job description -->
             <div class="job-actions">
-              <button class="apply-button">► Apply Now</button>
+              <button class="apply-button"><a href="${job.redirect_url}" target="_blank">Apply Now</a></button>
               <span class="job-posted">${job.posted}</span>
             </div>
-            <a href="${job.redirect_url}" target="_blank">Apply Now</a>
+            
           `;
           jobList.appendChild(jobCard);
         });
