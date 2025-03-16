@@ -44,8 +44,10 @@
           <button type="submit">Login</button>
         </div>
         <div class="form-group">
-          <button type="submit">Login with LinkedIn</button>
-        </div>
+          <button type="button" onclick="window.location='{{ url_for('linkedin_bp.linkedin_auth') }}'">
+            Login with LinkedIn
+          </button>
+        </div>        
       </form>
       <p>Don't have an account? <a href="/register" id = nav-register>Register here</a></p>
     </div>
