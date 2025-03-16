@@ -43,12 +43,33 @@
         const eventCard = document.createElement('div');
         eventCard.classList.add('event-card');
         eventCard.innerHTML = `
+          <div class="event-header">
+            <span class="event-badge ${event.badge.toLowerCase().replace(' ', '-')}">${event.badge}</span>
+            <span class="event-type">${event.type}</span>
+          </div>
           <h3 class="event-title">${event.title}</h3>
-          <p>${event.description}</p>
-          <div><strong>Location:</strong> ${event.location}</div>
-          <div><strong>Date:</strong> ${event.date}</div>
-          <div><strong>Organizer:</strong> ${event.organizer}</div>
-          <button class="register-button" ${event.badge === 'Past' ? 'disabled' : ''}>Register Now</button>
+          <div class="event-details">
+            <div class="event-date">
+              <span class="icon">📅</span>
+              <span>${event.date}</span>
+            </div>
+            <div class="event-location">
+              <span class="icon">📍</span>
+              <span>${event.location}</span>
+            </div>
+          </div>
+          <div class="event-organizer">
+            <span class="icon">👤</span>
+            <span>Hosted by ${event.organizer}</span>
+          </div>
+          <p class="event-description">${event.description}</p>
+          <div class="event-tags">
+            ${event.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+          <div class="event-actions">
+            <button class="register-button" ${event.badge === 'Past' ? 'disabled' : ''}>Register Now</button>
+            <span class="event-posted">${event.posted}</span>
+          </div>
         `;
         eventList.appendChild(eventCard);
       });
