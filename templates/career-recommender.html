@@ -137,6 +137,7 @@
         
       });
 
+<<<<<<< HEAD
   //   document.getElementById('careerRecommenderForm').addEventListener('submit', function (e) {
   //   e.preventDefault();
 
@@ -169,5 +170,55 @@
   //       console.error('Error fetching recommendations:', error);
   //     });
   // });
+=======
+      const recommendations = document.getElementById('recommendations');
+      recommendations.innerHTML = `
+        <div class="recommendation-card">
+          <h3>Software Engineer</h3>
+          <p>Recommended based on your skills in programming and interest in technology.</p>
+        </div>
+        <div class="recommendation-card">
+          <h3>Data Scientist</h3>
+          <p>Recommended based on your analytical skills and interest in data.</p>
+        </div>
+        <div class="recommendation-card">
+          <h3>UX Designer</h3>
+          <p>Recommended based on your design skills and interest in user experience.</p>
+        </div>
+      `;
+    });
+    document.getElementById('careerRecommenderForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Get form data
+    const skills = document.getElementById('skills').value;
+    const interests = document.getElementById('interests').value;
+    const education = document.getElementById('education').value;
+    const experience = document.getElementById('experience').value;
+
+    // Log the data (replace with API call to fetch recommendations)
+    console.log('Skills:', skills);
+    console.log('Interests:', interests);
+    console.log('Education:', education);
+    console.log('Experience:', experience);
+
+    // Fetch recommendations (placeholder logic)
+    fetch('/get-recommendations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ skills, interests, education, experience }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Recommendations:', data);
+        // Display recommendations on the page
+      })
+      .catch(error => {
+        console.error('Error fetching recommendations:', error);
+      });
+  });
+>>>>>>> 38fe280bcd4ccd94a8bcb1c59eca8154c294d54b
   </script>
 {% endblock %}

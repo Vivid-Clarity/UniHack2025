@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 import api_adsuna
 from events_api import events_api_bp # Import Blueprint
 from api_linkedin import linkedin_bp
+<<<<<<< HEAD
 from api_deepseek import init_deepseek_api, recommender_careerpath  # Import DeepSeek API methods
 
 app = Flask(__name__)
@@ -9,8 +10,13 @@ app.secret_key = 'some_random_secret_key'
 
 # Initialize DeepSeek API
 init_deepseek_api()
+=======
 
-#Register the Blueprint
+app = Flask(__name__)
+app.secret_key = 'some_random_secret_key'
+>>>>>>> 38fe280bcd4ccd94a8bcb1c59eca8154c294d54b
+
+# Register the Blueprint
 app.register_blueprint(events_api_bp)
 app.register_blueprint(linkedin_bp)
 
