@@ -86,7 +86,7 @@ header nav ul li a.active::after {
 }
 
 header nav ul li a:hover {
-  color: #007bff;
+  color: #7D3C98;
 }
 
 /* Hero Section */
@@ -117,6 +117,12 @@ header nav ul li a:hover {
   margin-top: -1px;
 } 
 
+.hero-text {
+  max-width: 800px; /* Adjust width as needed */
+  text-align: center;
+  margin: 0 auto 25px; /* Centers text and adds spacing */
+}
+
 .hero img {
   max-width: 100%;
   height: auto;
@@ -124,7 +130,7 @@ header nav ul li a:hover {
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 3.8rem;
   margin-bottom: 20px;
 }
 
@@ -142,7 +148,7 @@ header nav ul li a:hover {
   font-family: 'Space Grotesk', sans-serif;
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background: #007bff;
+  background: linear-gradient(135deg, #7D3C98, #5900ff);
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
@@ -152,8 +158,9 @@ header nav ul li a:hover {
 }
 
 .hero .cta-buttons a:hover {
-  background: #0056b3;
+  background: linear-gradient(135deg, #5900ff, #7D3C98);
 }
+
 
 /* Features Section */
 .features {
@@ -178,7 +185,7 @@ header nav ul li a:hover {
   font-family: 'Space Grotesk', sans-serif;
   margin: 0 0 0.5rem 0;
   font-size: 1.5rem;
-  color: #007bff;
+  color: #7D3C98;
 }
 
 .feature-card p {
@@ -190,7 +197,7 @@ header nav ul li a:hover {
   font-family: 'Space Grotesk', sans-serif;
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: #007bff;
+  background: #7D3C98;
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
@@ -226,7 +233,7 @@ header nav ul li a:hover {
 
 .search-bar button {
   padding: 0.75rem 1.5rem;
-  background: #007bff;
+  background: #7D3C98;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -235,7 +242,7 @@ header nav ul li a:hover {
 }
 
 .search-bar button:hover {
-  background: #0056b3;
+  background: #7D3C98;
 }
 
 /*Job Listing Styles*/
@@ -294,7 +301,7 @@ header nav ul li a:hover {
 
 .job-card .company-name {
   font-size: 1rem;
-  color: #007bff;
+  color: #7D3C98;
 }
 
 .job-card .company-rating {
@@ -342,7 +349,7 @@ header nav ul li a:hover {
 }
 
 .job-card .apply-button {
-  background: #007bff;
+  background: #7D3C98;
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;
@@ -508,7 +515,7 @@ header nav ul li a:hover {
 
 .form-container h2 {
   font-size: 2rem;
-  color: #007bff;
+  color: #7D3C98;
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -537,7 +544,7 @@ header nav ul li a:hover {
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #007bff;
+  border-color: #7D3C98;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   outline: none;
 }
@@ -550,7 +557,7 @@ header nav ul li a:hover {
 .form-group button {
   width: 100%;
   padding: 0.75rem 1.5rem;
-  background: #007bff;
+  background: #7D3C98;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -577,7 +584,7 @@ header nav ul li a:hover {
 
 .resume-preview h2 {
   font-size: 1.75rem;
-  color: #007bff;
+  color: #7D3C98;
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -631,7 +638,7 @@ header nav ul li a:hover {
 .recommendation-card h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1.25rem;
-  color: #007bff;
+  color: #7D3C98;
 }
 
 .recommendation-card p {
@@ -655,7 +662,7 @@ footer p {
 }
 
 footer a {
-  color: #007bff;
+  color: #7D3C98;
   text-decoration: none;
 }
 
