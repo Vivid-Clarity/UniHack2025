@@ -198,47 +198,6 @@
   <main>
     <!-- Search Bar -->
     <script>
-      // //fetchig jobs from backend [the muse]
-      // async function fetchJobs(searchQuery = "", location = "") {        
-      //   const url = `/api/searchJobs?query=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(location)}`;
-      //   console.log(url);
-        
-      //   const response = await fetch(url);
-      //   const jobs = await response.json();
-      //   return jobs;      
-      // }
-
-
-      // //render the jobs in the frontend
-      // function renderJobs(jobs){
-      //   const jobList = document.getElementById('jobList');
-      //   jobList.innerHTML = ``;
-
-      //   jobs.forEach(element => {
-      //     const jobCard = document.createElement('div');
-      //     jobCard.classList.add('job-card');
-      //     jobCard.innerHTML = `
-      //       <h3>${job.name}</h3>
-      //       <p>${job.company.name}</p>
-      //       <p>${job.locations[0].name}</p>
-      //       <p>${job.contents}</p>
-      //       <a href="${job.refs.landing_page}" target="_blank">Apply Now</a>
-      //     `;
-      //     jobList.appendChild(jobCard);
-      //   });
-      // }
-
-      // //handling the search bar
-      // async function filterJobs() {
-      //   const searchQuery = document.getElementById('search').value;
-      //   const location = "";
-
-      //   //get the jobs form the backend
-      //   const jobs = await fetchJobs(searchQuery,location);
-      //   //then render them inthe frontend
-      //   renderJobs(jobs);
-      // }
-
       //ADSUNA API STUFF BELOW--------------------------------------------
       function renderJobs(jobs) {
         const jobList = document.getElementById('jobList');
@@ -296,13 +255,6 @@
     <div class="search-bar">
       <input type="text" id="search" placeholder="Search jobs...">
       <!-- <input type="text" id="location" placeholder="Location...">  -->
-      <!-- <select id="filterStatus">
-        <option value="all">All</option>
-        <option value="applied">Applied</option>
-        <option value="interview">Interview</option>
-        <option value="offer">Offer</option>
-        <option value="rejected">Rejected</option>
-      </select> -->
       <button onclick="filterJobs()">Search</button>
     </div>
 
@@ -316,48 +268,5 @@
     <p>Contact: info@careerhub.com | Phone: +1 234 567 890</p>
     <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
   </footer>
-
-  <!-- <script>
-    // Sample Data
-    let jobs = [
-      { id: 1, title: "Software Engineer", company: "Tech Corp", status: "applied" },
-      { id: 2, title: "Product Manager", company: "Innovate Inc", status: "interview" },
-      { id: 3, title: "Data Scientist", company: "DataWorks", status: "offer" },
-    ];
-
-    // Render Jobs
-    function renderJobs(filteredJobs = jobs) {
-      const jobList = document.getElementById('jobList');
-      jobList.innerHTML = '';
-
-      filteredJobs.forEach(job => {
-        const jobCard = document.createElement('div');
-        jobCard.classList.add('job-card');
-        jobCard.innerHTML = `
-          <h3>${job.title}</h3>
-          <p>${job.company}</p>
-          <p class="status ${job.status}">${job.status.toUpperCase()}</p>
-        `;
-        jobList.appendChild(jobCard);
-      });
-    }
-
-    // Filter and Search Functionality
-    function filterJobs() {
-      const searchTerm = document.getElementById('search').value.toLowerCase();
-      const statusFilter = document.getElementById('filterStatus').value;
-
-      const filteredJobs = jobs.filter(job => {
-        const matchesSearch = job.title.toLowerCase().includes(searchTerm) || job.company.toLowerCase().includes(searchTerm);
-        const matchesStatus = statusFilter === 'all' || job.status === statusFilter;
-        return matchesSearch && matchesStatus;
-      });
-
-      renderJobs(filteredJobs);
-    }
-
-    // Initial Render
-    renderJobs();
-  </script> -->
 </body>
 </html>
