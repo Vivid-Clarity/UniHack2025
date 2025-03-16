@@ -198,54 +198,104 @@
   <main>
     <!-- Search Bar -->
     <script>
-      //fetchig jobs from backend
-      async function fetchJobs(searchQuery = "", location = "") {        
-        const url = `/api/searchJobs?query=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(location)}`;
-        console.log(url);
+      // //fetchig jobs from backend [the muse]
+      // async function fetchJobs(searchQuery = "", location = "") {        
+      //   const url = `/api/searchJobs?query=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(location)}`;
+      //   console.log(url);
         
-        const response = await fetch(url);
-        const jobs = await response.json();
-        return jobs;      
-      }
+      //   const response = await fetch(url);
+      //   const jobs = await response.json();
+      //   return jobs;      
+      // }
 
-      //render the jobs in the frontend
-      function renderJobs(jobs){
+
+      // //render the jobs in the frontend
+      // function renderJobs(jobs){
+      //   const jobList = document.getElementById('jobList');
+      //   jobList.innerHTML = ``;
+
+      //   jobs.forEach(element => {
+      //     const jobCard = document.createElement('div');
+      //     jobCard.classList.add('job-card');
+      //     jobCard.innerHTML = `
+      //       <h3>${job.name}</h3>
+      //       <p>${job.company.name}</p>
+      //       <p>${job.locations[0].name}</p>
+      //       <p>${job.contents}</p>
+      //       <a href="${job.refs.landing_page}" target="_blank">Apply Now</a>
+      //     `;
+      //     jobList.appendChild(jobCard);
+      //   });
+      // }
+
+      // //handling the search bar
+      // async function filterJobs() {
+      //   const searchQuery = document.getElementById('search').value;
+      //   const location = "";
+
+      //   //get the jobs form the backend
+      //   const jobs = await fetchJobs(searchQuery,location);
+      //   //then render them inthe frontend
+      //   renderJobs(jobs);
+      // }
+
+      //ADSUNA API STUFF BELOW--------------------------------------------
+      function renderJobs(jobs) {
         const jobList = document.getElementById('jobList');
-        jobList.innerHTML = ``;
+        if (!jobList) {
+          console.error("Job list element not found!");
+          return;
+        }
+        jobList.innerHTML = ''; // Clear the job list before rendering new jobs
 
-        jobs.forEach(element => {
+        // Check if jobs array is empty
+        if (jobs.length === 0) {
+          jobList.innerHTML = "<p>No jobs found.</p>";
+          return;
+        }
+
+        // Iterate over each job and create a job card
+        jobs.forEach(job => {
           const jobCard = document.createElement('div');
           jobCard.classList.add('job-card');
           jobCard.innerHTML = `
-            <h3>${job.name}</h3>
-            <p>${job.company.name}</p>
-            <p>${job.locations[0].name}</p>
-            <p>${job.contents}</p>
-            <a href="${job.refs.landing_page}" target="_blank">Apply Now</a>
+            <h3>${job.title}</h3>
+            <p>${job.company.display_name}</p>
+            <p>${job.location.display_name}</p>
+            <p>${job.description}</p>
+            <a href="${job.redirect_url}" target="_blank">Apply Now</a>
           `;
           jobList.appendChild(jobCard);
         });
-      }
+    }
 
-      //handling the search bar
-      async function filterJobs() {
-        const searchQuery = document.getElementById('search').value;
-        const location = "";
+    // Fetch jobs from the backend (Adzuna API)
+    async function fetchJobs(searchQuery = "", location = "") {
+      const url = `/api/searchJobs?query=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(location)}`;
+      const response = await fetch(url);
+      const jobs = await response.json();
+      return jobs;
+    }
 
-        //get the jobs form the backend
-        const jobs = await fetchJobs(searchQuery,location);
-        //then render them inthe frontend
-        renderJobs(jobs);
-      }
+    // Handle the search bar
+    async function filterJobs() {
+      const searchQuery = document.getElementById('search').value;
+      const location = ""; // Add a location input field if needed
 
-      //
-      // window.
+      // Fetch jobs from the backend
+      const jobs = await fetchJobs(searchQuery, location);
+
+      // Render the jobs in the frontend
+      renderJobs(jobs);
+    }
 
     </script>
 
+    
+
     <div class="search-bar">
       <input type="text" id="search" placeholder="Search jobs...">
-      <input type="text" id="location" placeholder="Location..."> 
+      <!-- <input type="text" id="location" placeholder="Location...">  -->
       <!-- <select id="filterStatus">
         <option value="all">All</option>
         <option value="applied">Applied</option>
