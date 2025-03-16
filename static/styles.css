@@ -86,7 +86,7 @@ header nav ul li a.active::after {
 }
 
 header nav ul li a:hover {
-  color: #007bff;
+  color: #7D3C98;
 }
 
 /* Hero Section */
@@ -117,6 +117,12 @@ header nav ul li a:hover {
   margin-top: -1px;
 } 
 
+.hero-text {
+  max-width: 800px; /* Adjust width as needed */
+  text-align: center;
+  margin: 0 auto 25px; /* Centers text and adds spacing */
+}
+
 .hero img {
   max-width: 100%;
   height: auto;
@@ -124,7 +130,7 @@ header nav ul li a:hover {
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 3.8rem;
   margin-bottom: 20px;
 }
 
@@ -142,7 +148,7 @@ header nav ul li a:hover {
   font-family: 'Space Grotesk', sans-serif;
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background: #007bff;
+  background: linear-gradient(135deg, #7D3C98, #5900ff);
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
@@ -152,7 +158,130 @@ header nav ul li a:hover {
 }
 
 .hero .cta-buttons a:hover {
+  background: linear-gradient(135deg, #5900ff, #7D3C98);
+}
+
+/* User Icon */
+.user-icon {
+  cursor: pointer;
+  margin-left: auto; /* Push the icon to the right */
+  padding: 0.5rem;
+}
+
+.user-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Login Window */
+.login-window {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  width: 300px;
+}
+
+.login-window h3 {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-window .form-group {
+  margin-bottom: 1rem;
+}
+
+.login-window .form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.login-window .form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-window .form-group input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.login-window .form-group button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.login-window .form-group button:hover {
   background: #0056b3;
+}
+
+.login-window p {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login-window a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-window a:hover {
+  text-decoration: underline;
+}
+
+/* Registration Form */
+.register-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.register-container h2 {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.register-container p {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.register-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.register-container a:hover {
+  text-decoration: underline;
 }
 
 /* Features Section */
@@ -172,13 +301,16 @@ header nav ul li a:hover {
   padding: 1.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures spacing is consistent and buttons align at the bottom */
 }
 
 .feature-card h3 {
   font-family: 'Space Grotesk', sans-serif;
   margin: 0 0 0.5rem 0;
   font-size: 1.5rem;
-  color: #007bff;
+  color: #7D3C98;
 }
 
 .feature-card p {
@@ -187,17 +319,19 @@ header nav ul li a:hover {
 }
 
 .feature-card a {
-  font-family: 'Space Grotesk', sans-serif;
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: #007bff;
+  padding: 0.5rem 1rem; /* Adjust padding to make the button narrower */
+  width: auto; /* Set width to auto or define a specific width */
+  min-width: 100px; /* Optional: set a minimum width */
+  background: #800080;
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
-  margin-top: 1rem;
   font-size: 0.9rem;
+  align-self: center; /* Ensure the button is centered */
+  text-align: center; /* Center the text inside the button */
+  display: inline-block; /* Use inline-block for better control */
+  margin-top: 20px; /* Added margin to create space between the text and the button */
 }
-
 .feature-card a:hover {
   background: #0056b3;
 }
@@ -226,7 +360,7 @@ header nav ul li a:hover {
 
 .search-bar button {
   padding: 0.75rem 1.5rem;
-  background: #007bff;
+  background: #7D3C98;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -235,7 +369,7 @@ header nav ul li a:hover {
 }
 
 .search-bar button:hover {
-  background: #0056b3;
+  background: #7D3C98;
 }
 
 /*Job Listing Styles*/
@@ -294,7 +428,7 @@ header nav ul li a:hover {
 
 .job-card .company-name {
   font-size: 1rem;
-  color: #007bff;
+  color: #7D3C98;
 }
 
 .job-card .company-rating {
@@ -342,7 +476,7 @@ header nav ul li a:hover {
 }
 
 .job-card .apply-button {
-  background: #007bff;
+  background: #7D3C98;
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;
@@ -508,7 +642,7 @@ header nav ul li a:hover {
 
 .form-container h2 {
   font-size: 2rem;
-  color: #007bff;
+  color: #7D3C98;
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -537,7 +671,7 @@ header nav ul li a:hover {
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #007bff;
+  border-color: #7D3C98;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   outline: none;
 }
@@ -550,7 +684,7 @@ header nav ul li a:hover {
 .form-group button {
   width: 100%;
   padding: 0.75rem 1.5rem;
-  background: #007bff;
+  background: #7D3C98;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -577,7 +711,7 @@ header nav ul li a:hover {
 
 .resume-preview h2 {
   font-size: 1.75rem;
-  color: #007bff;
+  color: #7D3C98;
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -631,7 +765,7 @@ header nav ul li a:hover {
 .recommendation-card h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1.25rem;
-  color: #007bff;
+  color: #7D3C98;
 }
 
 .recommendation-card p {
@@ -655,7 +789,7 @@ footer p {
 }
 
 footer a {
-  color: #007bff;
+  color: #7D3C98;
   text-decoration: none;
 }
 

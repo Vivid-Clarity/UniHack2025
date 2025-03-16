@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Tracker - Job Capsule</title>
-  <link rel="stylesheet" href="static/styles.css">
-</head>
-<body>
-  <!-- Placeholder for the navbar -->
-  <div id="navbar"></div>
+{% extends "base.html" %}
 
-  <main>
+{% block title %}Job Capsules{% endblock %}
+
+{% block content %}
     <!-- Search Bar -->
     <div class="search-bar">
       <input type="text" id="search" placeholder="Search jobs...">
@@ -139,5 +131,4 @@
     // Initial Render (filter jobs based on the search query)
     filterJobs();
   </script>
-</body>
-</html>
+{% endblock %}
