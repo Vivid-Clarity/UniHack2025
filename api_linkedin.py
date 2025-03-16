@@ -4,11 +4,9 @@ import requests
 
 linkedin_bp = Blueprint("linkedin_bp", __name__)
 
-# LinkedIn OAuth Credentials (Updated)
+# LinkedIn OAuth Credentials
 LINKEDIN_CLIENT_ID = "77s4r41rne0e9i"
 LINKEDIN_CLIENT_SECRET = "WPL_AP1.gsDI2ADDszrGUGAx.yviatA=="
-# LINKEDIN_REDIRECT_URI = "https://www.linkedin.com/developers/tools/oauth/redirect"
-
 LINKEDIN_REDIRECT_URI= "http://127.0.0.1:5000/auth/linkedin/callback"
 
 @linkedin_bp.route("/auth/linkedin")
@@ -16,7 +14,6 @@ def linkedin_auth():
     """
     Step 1: Redirect the user to LinkedIn's authorization page.
     """
-    # It's good practice to use a random state for CSRF protection
     state = secrets.token_hex(16)
     session["linkedin_oauth_state"] = state
 
@@ -25,7 +22,7 @@ def linkedin_auth():
         "?response_type=code"
         f"&client_id={LINKEDIN_CLIENT_ID}"
         f"&redirect_uri={LINKEDIN_REDIRECT_URI}"
-        "&scope=r_liteprofile%20r_emailaddress"
+        "&scope=openid%20profile%20email"  # << New scopes
         f"&state={state}"
     )
 
@@ -69,7 +66,6 @@ def linkedin_callback():
     if not access_token:
         return "No access token received from LinkedIn", 400
 
-    # Use the token to get user info from LinkedIn
     # 1. Basic profile
     profile_url = "https://api.linkedin.com/v2/me"
     headers = {"Authorization": f"Bearer {access_token}"}
@@ -94,10 +90,9 @@ def linkedin_callback():
     session["linkedin_user"] = {
         "first_name": first_name,
         "last_name": last_name,
-        "email": email_address
+        "email": email_address,
     }
 
-    # For demo purposes, return JSON; in production, redirect or render a page
     return jsonify({
         "access_token": access_token,
         "profile_data": profile_data,
