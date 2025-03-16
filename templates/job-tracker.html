@@ -25,25 +25,15 @@
           const jobCard = document.createElement('div');
           jobCard.classList.add('job-card');
           jobCard.innerHTML = `
-            <div class="job-header">
-              <span class="job-badge">${job.badge}</span>
-              <span class="job-hiring">${job.hiring}</span>
-            </div>
             <h3 class="job-title">${job.title}</h3>
             <div class="job-company">
               <span class="company-name">${job.company.display_name}</span>
-              <span class="company-rating">${job.rating}</span>
             </div>
             <div class="job-location">${job.location.display_name}</div>
-            <div class="job-salary">${job.salary}</div>
-            <div class="job-type">
-              <span class="job-type-badge">${job.type}</span>
-              <span class="job-schedule">${job.schedule}</span>
-            </div>
             <p class="job-description">${job.description}</p> <!-- Add job description -->
             <div class="job-actions">
               <button class="apply-button"><a href="${job.redirect_url}" target="_blank">Apply Now</a></button>
-              <span class="job-posted">${job.posted}</span>
+              
             </div>
             
           `;
