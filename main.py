@@ -1,11 +1,14 @@
 from flask import Flask, render_template, jsonify, request
 import api_adsuna
 from events_api import events_api_bp # Import Blueprint
+from api_linkedin import linkedin_bp
 
 app = Flask(__name__)
+app.secret_key = 'some_random_secret_key'
 
 #Register the Blueprint
 app.register_blueprint(events_api_bp)
+app.register_blueprint(linkedin_bp)
 
 @app.route("/")
 def home():
