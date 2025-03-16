@@ -21,9 +21,9 @@ def recommender_careerpath(user_data):
     prompt = f"""
         Based on the following user data, recommend a career pathway:
         - Education: {user_data.get('education')}
-        - Job History: {user_data.get('job_history')}
         - Skills: {user_data.get('skills')}
         - Interests: {user_data.get('interests')}
+        - Experience: {user_data.get('years of experience')}
     """
 
     # Prepare the request payload
