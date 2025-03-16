@@ -37,10 +37,10 @@ def linkedin_callback():
     """
     # Retrieve the code and state from the incoming request
     code = request.args.get("code")
-    state = request.args.get("state")
+    returned_state = request.args.get("state")
 
-    # Retrieve and pop the saved state from the session
-    saved_state = session.pop("linkedin_oauth_state", None)
+    saved_state = session.pop("linkedin_oauth_state", None)  # remove from session to prevent reuse
+
 
     # Verify the state to protect against CSRF
     if not state or not saved_state or state != saved_state:
@@ -66,35 +66,36 @@ def linkedin_callback():
     if not access_token:
         return "No access token received from LinkedIn", 400
 
-    # 1. Basic profile
-    profile_url = "https://api.linkedin.com/v2/me"
+    # Call the OpenID Connect endpoint to get user info (OIDC profile + email)
+    oidc_url = "https://api.linkedin.com/v2/oidcUserInfo"
     headers = {"Authorization": f"Bearer {access_token}"}
-    profile_response = requests.get(profile_url, headers=headers, timeout=10)
-    profile_data = profile_response.json()
+    oidc_response = requests.get(oidc_url, headers=headers, timeout=10)
 
-    # 2. Email
-    email_url = "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))"
-    email_response = requests.get(email_url, headers=headers, timeout=10)
-    email_data = email_response.json()
+    if oidc_response.status_code != 200:
+        return f"Failed to fetch userinfo: {oidc_response.text}", 400
 
-    # Extract user data
-    first_name = profile_data.get("localizedFirstName", "")
-    last_name = profile_data.get("localizedLastName", "")
-    email_address = None
+    oidc_data = oidc_response.json()
+    # Example fields: "sub", "email", "email_verified", "name", "given_name", "family_name", "picture", "locale", etc.
 
-    elements = email_data.get("elements", [])
-    if elements and "handle~" in elements[0]:
-        email_address = elements[0]["handle~"].get("emailAddress")
+    # Extract some common fields
+    sub = oidc_data.get("sub")
+    email = oidc_data.get("email")
+    email_verified = oidc_data.get("email_verified")
+    full_name = oidc_data.get("name")
+    given_name = oidc_data.get("given_name")
+    family_name = oidc_data.get("family_name")
 
-    # Store or process user data as needed
+    # Store user data in session (or a database) for later use
     session["linkedin_user"] = {
-        "first_name": first_name,
-        "last_name": last_name,
-        "email": email_address,
+        "sub": sub,
+        "email": email,
+        "email_verified": email_verified,
+        "full_name": full_name,
+        "given_name": given_name,
+        "family_name": family_name
     }
 
     return jsonify({
         "access_token": access_token,
-        "profile_data": profile_data,
-        "email_data": email_data
+        "oidc_data": oidc_data,
     })
