@@ -22,7 +22,7 @@ def recommender_careerpath(user_data):
         Based on the following user data, recommend a career pathway:
         - Skills: {user_data.get('skills')}
         - Interests: {user_data.get('interests')}
-        - Education: {user.data.get('education')}
+        - Education: {user_data.get('education')}
         - Experience: {user_data.get('experience')}
     """
 
