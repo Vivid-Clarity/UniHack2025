@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume Builder - Job Capsule</title>
-  <link rel="stylesheet" href="static/styles.css">
-  <!-- Include jsPDF library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <!-- Include html2pdf.js library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-</head>
-<body>
-  <!-- Placeholder for the navbar -->
-  <div id="navbar"></div>
+{% extends "base.html" %}
 
-  <main>
+{% block title %}Job Capsules{% endblock %}
+
+{% block content %}
     <!-- Resume Builder Form -->
     <div class="form-container">
       <h2>Resume Builder</h2>
@@ -133,5 +121,4 @@
         .save('resume.pdf');
     });
   </script>
-</body>
-</html>
+{% endblock %}
