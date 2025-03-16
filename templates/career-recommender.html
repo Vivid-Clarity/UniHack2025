@@ -51,8 +51,57 @@
       });
 
     // Placeholder for AI Career Recommender functionality
-    document.getElementById('careerForm').addEventListener('submit', function (e) {
+    document.getElementById('careerForm').addEventListener('submit', async function (e) {
       e.preventDefault();
+
+      // Get form data
+      const skills = document.getElementById('skills').value;
+        const interests = document.getElementById('interests').value;
+        const experience = document.getElementById('experience').value;
+
+        // Prepare the data to send to the backend
+        const userData = {
+          skills: skills,
+          interests: interests,
+          experience: experience
+        };
+
+        // Send data to the backend
+        try {
+          const response = await fetch('/api/recommendCareer', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to fetch recommendations');
+          }
+
+          const data = await response.json();
+          const recommendations = document.getElementById('recommendations');
+
+          // Clear previous recommendations
+          recommendations.innerHTML = '';
+
+          // Display the recommendations
+          if (data.recommendation) {
+            recommendations.innerHTML = `
+              <div class="recommendation-card">
+                <h3>Career Recommendation</h3>
+                <p>${data.recommendation}</p>
+              </div>
+            `;
+          } else {
+            recommendations.innerHTML = `<p>No recommendations available.</p>`;
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          document.getElementById('recommendations').innerHTML = `<p>Failed to fetch recommendations. Please try again later.</p>`;
+        }
+
       const recommendations = document.getElementById('recommendations');
       recommendations.innerHTML = `
         <div class="recommendation-card">
