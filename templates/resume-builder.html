@@ -3,194 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Resume Builder - Career Hub</title>
-  <style>
-    /* General Styles */
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* Header Styles */
-    header {
-      background: #ffffff;
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin: 0;
-      color: #333;
-    }
-
-    header nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 1rem 0 0 0;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-
-    header nav ul li a {
-      color: #555;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      position: relative;
-    }
-
-    header nav ul li a.active::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: #007bff;
-      position: absolute;
-      bottom: -0.5rem;
-      left: 0;
-    }
-
-    header nav ul li a:hover {
-      color: #000;
-    }
-
-    /* Form Styles */
-    .form-container {
-      background: #ffffff;
-      padding: 2rem;
-      margin: 1rem auto;
-      max-width: 800px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .form-group button {
-      padding: 0.75rem 1.5rem;
-      background: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    .form-group button:hover {
-      background: #0056b3;
-    }
-
-    /* Resume Preview */
-    .resume-preview {
-      background: #ffffff;
-      padding: 2rem;
-      margin: 1rem auto;
-      max-width: 800px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .resume-preview h2 {
-      margin: 0 0 1rem 0;
-      font-size: 1.5rem;
-      color: #007bff;
-    }
-
-    .resume-preview p {
-      margin: 0.25rem 0;
-      color: #555;
-    }
-
-    /* Footer Styles */
-    footer {
-      background: #333;
-      color: #fff;
-      padding: 1rem 2rem;
-      text-align: center;
-      margin-top: auto;
-    }
-
-    footer p {
-      margin: 0.5rem 0;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <title>Resume Builder - Job Capsule</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <!-- Include jsPDF library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Include html2pdf.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Career Hub</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="job-tracker.html">Job Tracker</a></li>
-        <li><a href="event-finder.html">Event Finder</a></li>
-        <li><a href="career-recommender.html">AI Career Recommender</a></li>
-        <li><a href="resume-builder.html" class="active">AI Resume Builder</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Placeholder for the navbar -->
+  <div id="navbar"></div>
 
   <main>
     <!-- Resume Builder Form -->
     <div class="form-container">
-      <h2>AI Resume Builder</h2>
+      <h2>Resume Builder</h2>
       <form id="resumeForm">
+        <!-- Full Name -->
         <div class="form-group">
           <label for="fullName">Full Name</label>
           <input type="text" id="fullName" placeholder="Enter your full name" required>
         </div>
+    
+        <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" placeholder="Enter your email" required>
         </div>
+    
+        <!-- Phone Number -->
         <div class="form-group">
-          <label for="experience">Work Experience</label>
-          <textarea id="experience" placeholder="Describe your work experience" required></textarea>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter your phone number" required>
         </div>
+    
+        <!-- LinkedIn Profile -->
         <div class="form-group">
-          <label for="skills">Skills</label>
-          <textarea id="skills" placeholder="List your skills" required></textarea>
+          <label for="linkedin">LinkedIn Profile (optional)</label>
+          <input type="url" id="linkedin" placeholder="Enter your LinkedIn profile URL">
         </div>
+    
+        <!-- Portfolio/Website -->
+        <div class="form-group">
+          <label for="portfolio">Portfolio/Website (optional)</label>
+          <input type="url" id="portfolio" placeholder="Enter your portfolio/website URL">
+        </div>
+    
+        <!-- Professional Summary -->
+        <div class="form-group">
+          <label for="summary">Professional Summary</label>
+          <textarea id="summary" placeholder="Write a brief summary of your career goals and skills" required></textarea>
+        </div>
+    
+        <!-- Submit Button -->
         <div class="form-group">
           <button type="submit">Generate Resume</button>
         </div>
@@ -199,7 +64,21 @@
 
     <!-- Resume Preview -->
     <div class="resume-preview" id="resumePreview">
-      <!-- Resume will be dynamically added here -->
+      <h2>Resume Preview</h2>
+      <p><strong>Name:</strong> <span id="previewName"></span></p>
+      <p><strong>Email:</strong> <span id="previewEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="previewPhone"></span></p>
+      <p><strong>LinkedIn:</strong> <span id="previewLinkedin"></span></p>
+      <p><strong>Portfolio:</strong> <span id="previewPortfolio"></span></p>
+      <p><strong>Professional Summary:</strong> <span id="previewSummary"></span></p>
+      <p><strong>Work Experience:</strong> <span id="previewExperience"></span></p>
+      <p><strong>Education:</strong> <span id="previewEducation"></span></p>
+      <p><strong>Skills:</strong> <span id="previewSkills"></span></p>
+      <p><strong>Certifications:</strong> <span id="previewCertifications"></span></p>
+      <p><strong>Projects:</strong> <span id="previewProjects"></span></p>
+      <p><strong>Languages:</strong> <span id="previewLanguages"></span></p>
+      <p><strong>Hobbies/Interests:</strong> <span id="previewHobbies"></span></p>
+      <button id="downloadPdf">Download as PDF</button>
     </div>
   </main>
 
@@ -209,17 +88,49 @@
   </footer>
 
   <script>
-    // Placeholder for AI Resume Builder functionality
+    // Fetch and inject the navbar
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar').innerHTML = data;
+
+        // Highlight the active link
+        const currentPage = window.location.pathname.split('/').pop();
+        const activeLink = document.getElementById(`nav-${currentPage.replace('.html', '')}`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+      });
+
+    // Handle form submission
     document.getElementById('resumeForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const resumePreview = document.getElementById('resumePreview');
-      resumePreview.innerHTML = `
-        <h2>Resume Preview</h2>
-        <p><strong>Name:</strong> ${document.getElementById('fullName').value}</p>
-        <p><strong>Email:</strong> ${document.getElementById('email').value}</p>
-        <p><strong>Work Experience:</strong> ${document.getElementById('experience').value}</p>
-        <p><strong>Skills:</strong> ${document.getElementById('skills').value}</p>
-      `;
+
+      // Update resume preview
+      document.getElementById('previewName').textContent = document.getElementById('fullName').value;
+      document.getElementById('previewEmail').textContent = document.getElementById('email').value;
+      document.getElementById('previewPhone').textContent = document.getElementById('phone').value;
+      document.getElementById('previewLinkedin').textContent = document.getElementById('linkedin').value;
+      document.getElementById('previewPortfolio').textContent = document.getElementById('portfolio').value;
+      document.getElementById('previewSummary').textContent = document.getElementById('summary').value;
+      document.getElementById('previewExperience').textContent = document.getElementById('experience').value;
+      document.getElementById('previewEducation').textContent = document.getElementById('education').value;
+      document.getElementById('previewSkills').textContent = document.getElementById('skills').value;
+      document.getElementById('previewCertifications').textContent = document.getElementById('certifications').value;
+      document.getElementById('previewProjects').textContent = document.getElementById('projects').value;
+      document.getElementById('previewLanguages').textContent = document.getElementById('languages').value;
+      document.getElementById('previewHobbies').textContent = document.getElementById('hobbies').value;
+
+      // Show resume preview section
+      document.getElementById('resumePreview').style.display = 'block';
+    });
+
+    // Download as PDF
+    document.getElementById('downloadPdf').addEventListener('click', function () {
+      const element = document.getElementById('resumePreview');
+      html2pdf()
+        .from(element)
+        .save('resume.pdf');
     });
   </script>
 </body>

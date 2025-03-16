@@ -1,5 +1,4 @@
 from flask import Flask, render_template, jsonify, request
-import api_theMuse
 import api_adsuna
 from events_api import events_api_bp # Import Blueprint
 
@@ -11,6 +10,8 @@ app.register_blueprint(events_api_bp)
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
 
 @app.route("/jobTracker")
 def jobTracker():
