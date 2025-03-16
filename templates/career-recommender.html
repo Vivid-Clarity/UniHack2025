@@ -6,23 +6,37 @@
     <!-- Career Recommender Form -->
     <div class="form-container">
       <h2>AI Career Recommender</h2>
-      <form id="careerForm">
+      <form id="careerRecommenderForm">
+        <!-- Skills Input -->
         <div class="form-group">
           <label for="skills">Your Skills</label>
-          <input type="text" id="skills" placeholder="Enter your skills (e.g., programming, design)" required>
+          <textarea id="skills" placeholder="Enter your skills (e.g., programming, design)" required></textarea>
         </div>
+  
+        <!-- Interests Input -->
         <div class="form-group">
           <label for="interests">Your Interests</label>
-          <input type="text" id="interests" placeholder="Enter your interests (e.g., technology, healthcare)" required>
+          <textarea id="interests" placeholder="Enter your interests (e.g., technology, healthcare)" required></textarea>
         </div>
+  
+        <!-- Education Input -->
+        <div class="form-group">
+          <label for="education">Your Education</label>
+          <input type="text" id="education" placeholder="Enter your education (e.g., Bachelor's in Computer Science)" required>
+        </div>
+  
+        <!-- Years of Experience Dropdown -->
         <div class="form-group">
           <label for="experience">Years of Experience</label>
           <select id="experience" required>
             <option value="0-2">0-2 years</option>
-            <option value="3-5">3-5 years</option>
-            <option value="5+">5+ years</option>
+            <option value="2-5">2-5 years</option>
+            <option value="5-10">5-10 years</option>
+            <option value="10+">10+ years</option>
           </select>
         </div>
+  
+        <!-- Submit Button -->
         <div class="form-group">
           <button type="submit">Get Recommendations</button>
         </div>
