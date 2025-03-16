@@ -1,7 +1,15 @@
+"""
+This is the old job finder API I used
+Problem is that we can only search for specific pre defined catagories,
+limiting our web sites capalbilities
+
+NOT IN USE IN FINAL PRODUCT
+"""
+
+
 import requests
 
 API_KEY = "f7f914b9b885356c28807ced4a220e3af192f3b5470fe9ba608e352ba970ce7d"
-
 
 def headers():
     return {
