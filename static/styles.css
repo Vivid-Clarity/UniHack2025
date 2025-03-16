@@ -31,18 +31,19 @@ body {
 
 /* Header Styles */
 header {
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  backdrop-filter: blur(10px); /* Blur effect for a modern look */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Vertically center items */
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
-
+/* Logo Container */
 header .logo-container {
   display: flex;
   align-items: center;
+  margin-right: auto; /* Push logo to the left */
 }
 
 header .logo-container img {
@@ -57,12 +58,14 @@ header h1 {
   color: #333;
 }
 
+/* Navigation Styles */
 header nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 1.5rem;
+  gap: 1.5rem; /* Space between navigation items */
+  align-items: center; /* Vertically center navigation items */
 }
 
 header nav ul li a {
@@ -477,8 +480,8 @@ header nav ul li a:hover {
   align-items: center;
 }
 
-a:link {
-  color: white;
+.job-card .a:link {
+  color: rgb(255, 255, 255);
   /* background-color: transparent; */
   text-decoration: none;
 }
