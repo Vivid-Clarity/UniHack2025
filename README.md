@@ -4,6 +4,8 @@ A career companion web app built for UniHack 2025. Job Capsules brings job searc
 
 Built with Flask, vanilla JS, and a handful of external APIs.
 
+**Live demo:** [unihack2025.onrender.com](https://unihack2025.onrender.com) (hosted on Render's free tier — may take ~30–50s to wake up on first load)
+
 ---
 
 ## Quick start
