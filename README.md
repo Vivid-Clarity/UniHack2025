@@ -136,18 +136,6 @@ The LinkedIn redirect URI is set to `http://127.0.0.1:5000/auth/linkedin/callbac
 
 ---
 
-## Roadmap
-
-- [ ] Add the remaining resume form fields and include `html2pdf.js` for PDF export
-- [ ] Add `/login` and `/register` routes with a user store
-- [ ] Connect the LinkedIn OAuth result to a logged-in session
-- [ ] Add saved-jobs tracking so the Job Tracker persists applications and their status
-- [ ] Swap the built-in event dataset for a live events feed
-- [ ] Move API credentials to environment variables
-- [ ] Wire up the "Register Now" button on event cards
-
----
-
 ## Tech stack
 
 Flask · Jinja2 templates · vanilla JavaScript · CSS · Adzuna API · OpenRouter (DeepSeek) · LinkedIn OAuth 2.0
