@@ -49,6 +49,9 @@
     </div>
   </main>
 
+  <!-- Markdown renderer for the AI response -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+
   <script>
     // Fetch and inject the navbar
     fetch('navbar.html')
@@ -82,6 +85,13 @@
           experience: experience
         };
 
+        // Show a loading state -- the model can take 20+ seconds to respond
+        const submitButton = this.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Generating...';
+        document.getElementById('recommendations').innerHTML =
+          '<p>Finding the right career path for you, this can take up to a minute...</p>';
+
         // Send data to the backend
         try {
           const response = await fetch('/api/recommendCareer', {
@@ -102,12 +112,17 @@
           // Clear previous recommendations
           recommendations.innerHTML = '';
 
-          // Display the recommendations
+          // Display the recommendations. The model replies in Markdown, so
+          // render it if marked.js loaded, otherwise show the raw text.
           if (data.recommendation) {
+            const body = (typeof marked !== 'undefined')
+              ? marked.parse(data.recommendation)
+              : `<p style="white-space: pre-wrap;">${data.recommendation}</p>`;
+
             recommendations.innerHTML = `
               <div class="recommendation-card">
                 <h3>Career Recommendation</h3>
-                <p>${data.recommendation}</p>
+                ${body}
               </div>
             `;
           } else {
@@ -116,25 +131,10 @@
         } catch (error) {
           console.error('Error:', error);
           document.getElementById('recommendations').innerHTML = `<p>Failed to fetch recommendations. Please try again later.</p>`;
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Get Recommendations';
         }
-        
-        // Fetch recommendations (placeholder logic)
-        fetch('/api/recommendCareer', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ skills, interests, education, experience }),
-        })
-          .then(response => response.json())
-          .then(data => {
-            console.log('Recommendations:', data);
-            // Display recommendations on the page
-          })
-          .catch(error => {
-            console.error('Error fetching recommendations:', error);
-        });
-        
       });
 
   </script>
