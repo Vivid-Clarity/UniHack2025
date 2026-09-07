@@ -75,4 +75,15 @@
     </div>
   </main>
 
+  <script>
+    // Pre-fill and run search if a "search" query param was passed in (e.g. from the homepage)
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const search = params.get('search');
+      if (search) {
+        document.getElementById('search').value = search;
+        filterJobs();
+      }
+    })();
+  </script>
 {% endblock %}

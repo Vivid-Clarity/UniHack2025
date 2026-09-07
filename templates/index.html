@@ -58,11 +58,9 @@
       function searchJobs() {
         const jobSearch = document.getElementById('jobSearch').value.trim();
         if (jobSearch) {
-          // Redirect to job-tracker.html with the search query
-          window.location.href = `job-tracker.html?search=${encodeURIComponent(jobSearch)}`;
+          window.location.href = `/jobTracker?search=${encodeURIComponent(jobSearch)}`;
         } else {
-          // Redirect to job-tracker.html without a search query
-          window.location.href = 'job-tracker.html';
+          window.location.href = '/jobTracker';
         }
       }
   </script>
